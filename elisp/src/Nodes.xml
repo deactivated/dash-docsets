@@ -1,0 +1,8 @@
+<DocSetNodes version="1.0">
+  <TOC>
+    <Node type="folder">
+      <Name>Emacs Lisp Documentation Set</Name>
+      <Path>elisp/index.html</Path>
+    </Node>
+  </TOC>
+</DocSetNodes>
