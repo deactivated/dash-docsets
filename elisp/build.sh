@@ -11,6 +11,7 @@ function make_structure {
     mkdir -p "$DOCSET/Contents/Resources/Documents" &&
     cp "src/Info.plist" "$DOCSET/Contents" &&
     cp "src/Nodes.xml" "$DOCSET/Contents/Resources" &&
+    cp "src/icon.png" "$DOCSET/" &&
     echo $DOCSET
 }
 
