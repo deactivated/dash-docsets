@@ -33,6 +33,10 @@ function tokenize_docs {
     ./tokenize.py "$1"
 }
 
+function rewrite_docs {
+    find "$1" -name "*html" -print0 | xargs -0 ./rewrite_anchors.pl
+}
+
 function build {
     local DOCSET=$(make_structure) &&
     local DOCSET_XML="$DOCSET/Contents/Resources" &&
@@ -40,6 +44,7 @@ function build {
 
     fetch_source_docs "$DOCSET_DOC" &&
     tokenize_docs "$DOCSET_DOC" > "$DOCSET_XML/Tokens.xml" &&
+    rewrite_docs "$DOCSET_DOC" &&
     $DOCSETUTIL index "$DOCSET"
 }
 
