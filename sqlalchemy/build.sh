@@ -8,11 +8,11 @@ function build_rev {
     local REPO REV TAG &&
     REPO=$1 && shift &&
     TMP=$1 && shift &&
-    REV=$1 && shift &&
+    TAG=$1 && shift &&
     TAG=$(
         cd "$REPO" &&
-        hg tags | grep "rel_0_$REV" | cut -d ' ' -f 1 | head -n 1
-    ) &&
+        hg tags | grep "$TAG" | cut -d ' ' -f 1 | head -n 1
+    ) && [[ -n "$TAG" ]] &&
     (
         echo "checking out $TAG" &&
         cd "$REPO" &&
@@ -26,15 +26,13 @@ function build_rev {
     (
         NAME="SQLAlchemy $(echo $TAG | sed -e 's/rel_//' -e 'y/_/./')" &&
         echo "building docset $NAME" &&
-        doc2dash \
-            -i src/icon.png \
-            -n "$NAME" \
-            "$TMP/$TAG/doc/build"
-    )
+        doc2dash -i src/icon.png -n "$NAME" "$TMP/$TAG/doc/build"
+    ) &&
+    echo "done"
 }
 
 function build {
-    local REPO TMP &&
+    local REPO TMP TAG &&
     REPO=$1 && shift &&
 
     if [[ -z "$REPO" ]]; then
@@ -50,8 +48,11 @@ function build {
     fi
 
     TMP=$(cd "$(mktemp -d './source.XXXXXX')" && pwd) &&
-    build_rev "$REPO" "$TMP" 7
-    rm -rf "$TMP"
+
+    while [[ -n "$1" ]]; do
+        build_rev "$REPO" "$TMP" "$1" &&
+        shift || return
+    done
 }
 
 build "$@"
