@@ -10,6 +10,7 @@ def extract_tokens(data):
     type_map = {
         "Function": "func",
         "Command": "func",
+        "Special Form": "func",
         "Variable": "instp"
     }
 
