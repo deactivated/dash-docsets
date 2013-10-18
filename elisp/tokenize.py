@@ -7,13 +7,18 @@ import argparse
 
 
 def extract_tokens(data):
+    # See list of types supported by Dash at:
+    # http://kapeli.com/docsets#supportedentrytypes
+
     type_map = {
         "Function": "func",
         "Command": "func",
         "Special Form": "func",
-        "Macro": "func",
+        "Macro": "macro",
         "Variable": "instp",
         "User Option": "instp",
+        "Prefix Command": "data",
+        "Constant": "Constant",
     }
 
     for symbol_link, symbol_type, symbol_name in re.findall(

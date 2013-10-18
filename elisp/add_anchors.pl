@@ -11,6 +11,8 @@ my @type = (
   'Macro',
   'Variable',
   'User Option',
+  'Prefix Command',
+  'Constant',
 );
 
 my $types_rx = '(?:' . join('|', @type) . ')';
