@@ -34,7 +34,7 @@ function tokenize_docs {
 }
 
 function rewrite_docs {
-    find "$1" -name "*html" -print0 | xargs -0 ./rewrite_anchors.pl
+    find "$1" -name "*html" -print0 | xargs -0 ./add_anchors.pl
 }
 
 function build {
