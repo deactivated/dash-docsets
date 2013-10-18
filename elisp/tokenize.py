@@ -17,8 +17,8 @@ def extract_tokens(data):
     for symbol_link, symbol_type, symbol_name in re.findall(
             r"""
             <a\s*name="(?P<anchor>[^\"]+)"></a>\s*
-            &mdash;\s*(?P<type>[\w-]+):\s*
-            <b>(?P<name>[\w-]+)</b>
+            &mdash;\s*(?P<type>[\w\s\-]+):\s*
+            <b>(?P<name>.+?)</b>
             """,
             data, re.X):
 
