@@ -14,11 +14,11 @@ def extract_tokens(data):
         "Variable": "instp"
     }
 
-    for symbol_type, symbol_name, symbol_link in re.findall(
+    for symbol_link, symbol_type, symbol_name in re.findall(
             r"""
-            &mdash;\s*(?P<type>[\w-]+):\s*<b>(?P<name>[\w-]+)</b>
-            .*?
-            <a\s*name="(?P<anchor>.*?)">
+            <a\s*name="(?P<anchor>[^\"]+)"></a>\s*
+            &mdash;\s*(?P<type>[\w-]+):\s*
+            <b>(?P<name>[\w-]+)</b>
             """,
             data, re.X):
 

@@ -43,8 +43,8 @@ function build {
     local DOCSET_DOC="$DOCSET/Contents/Resources/Documents" &&
 
     fetch_source_docs "$DOCSET_DOC" &&
-    tokenize_docs "$DOCSET_DOC" > "$DOCSET_XML/Tokens.xml" &&
     rewrite_docs "$DOCSET_DOC" &&
+    tokenize_docs "$DOCSET_DOC" > "$DOCSET_XML/Tokens.xml" &&
     $DOCSETUTIL index "$DOCSET"
 }
 
