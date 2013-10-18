@@ -11,7 +11,9 @@ def extract_tokens(data):
         "Function": "func",
         "Command": "func",
         "Special Form": "func",
-        "Variable": "instp"
+        "Macro": "func",
+        "Variable": "instp",
+        "User Option": "instp",
     }
 
     for symbol_link, symbol_type, symbol_name in re.findall(
