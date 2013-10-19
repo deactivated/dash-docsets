@@ -2,7 +2,7 @@
 
 DOCSET_NAME="Emacs Lisp"
 SOURCE_URL=http://www.gnu.org/software/emacs/manual/elisp.html_node.tar.gz
-SOURCE_MD5=9db39d40ada794b3ed8806a4fb9cf10c
+SOURCE_MD5=a337b69c704ff7e54fd7567f3f0de1a1
 
 DOCSETUTIL=/Applications/Xcode.app/Contents/Developer/usr/bin/docsetutil
 
@@ -34,7 +34,7 @@ function tokenize_docs {
 }
 
 function rewrite_docs {
-    find "$1" -name "*html" -print0 | xargs -0 ./rewrite_anchors.pl
+    find "$1" -name "*html" -print0 | xargs -0 ./add_anchors.pl
 }
 
 function build {
@@ -43,8 +43,8 @@ function build {
     local DOCSET_DOC="$DOCSET/Contents/Resources/Documents" &&
 
     fetch_source_docs "$DOCSET_DOC" &&
-    tokenize_docs "$DOCSET_DOC" > "$DOCSET_XML/Tokens.xml" &&
     rewrite_docs "$DOCSET_DOC" &&
+    tokenize_docs "$DOCSET_DOC" > "$DOCSET_XML/Tokens.xml" &&
     $DOCSETUTIL index "$DOCSET"
 }
 
